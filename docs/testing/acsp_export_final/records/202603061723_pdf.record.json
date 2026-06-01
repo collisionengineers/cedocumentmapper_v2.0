@@ -1,0 +1,139 @@
+{
+  "provider": {
+    "provider_id": "acsp",
+    "provider_name": "ACSP",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "ACSP",
+      "raw_value": "ACSP",
+      "rule_id": "acsp_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "FP18ENU",
+      "raw_value": "FP18 ENU",
+      "rule_id": "acsp_vrm",
+      "confidence": 0.92,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 33,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "Toyota Avensis",
+      "raw_value": "Toyota Avensis",
+      "rule_id": "acsp_vehicle_model",
+      "confidence": 0.92,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 34,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "claimant_name": {
+      "value": "Kaisar Khan",
+      "raw_value": "Kaisar Khan",
+      "rule_id": "acsp_claimant_name",
+      "confidence": 0.9,
+      "source_span": null,
+      "issues": []
+    },
+    "reference": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_reference",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "reference",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'reference' is empty."
+        }
+      ]
+    },
+    "incident_date": {
+      "value": "06/03/2026",
+      "raw_value": "6/3/26",
+      "rule_id": "acsp_incident_date",
+      "confidence": 0.95,
+      "source_span": null,
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_instruction_date",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "instruction_date",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'instruction_date' is empty."
+        }
+      ]
+    },
+    "inspection_date": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_inspection_date",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "32 Broadwood Rise\nCrawley\n\n\n\nRH11 9SE",
+      "raw_value": "32 Broadwood Rise, Crawley, RH11\n9SE",
+      "rule_id": "acsp_inspection_address",
+      "confidence": 0.85,
+      "source_span": null,
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "Client was established on the roundabout proceeding ahead, tp can from his right at speed, failed to observe that clinet was already on the roundabout and collided into the o/s front door and rear.",
+      "raw_value": "Client was established on the roundabout proceeding ahead, tp can from his right at speed, failed to observe that clinet was already on the roundabout and collided into the o/s front door and rear.",
+      "rule_id": "acsp_accident_circumstances",
+      "confidence": 0.85,
+      "source_span": null,
+      "issues": []
+    },
+    "vat_status": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_vat_status",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_mileage",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_mileage_unit",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}

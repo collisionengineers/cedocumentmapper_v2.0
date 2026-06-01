@@ -34,6 +34,9 @@ class WebviewBridge:
             traceback.print_exc()
             raise e
 
+    def loadProviders(self) -> list[dict[str, Any]]:
+        return self.load_providers()
+
     def save_providers(self, providers: list[dict[str, Any]]) -> bool:
         try:
             self.service.save_provider_catalog(providers)
@@ -42,6 +45,9 @@ class WebviewBridge:
             import traceback
             traceback.print_exc()
             raise e
+
+    def saveProviders(self, providers: list[dict[str, Any]]) -> bool:
+        return self.save_providers(providers)
 
     def _render_docx_to_html(self, doc_path: Path) -> str:
         try:
@@ -130,81 +136,35 @@ class WebviewBridge:
 
     def _render_email_to_html(self, doc_path: Path) -> str:
         try:
-            from email import policy
-            from email.parser import BytesParser
-            import extract_msg
             import html as html_lib
-            
-            headers = {}
-            body_html = ""
-            body_text = ""
-            
-            ext = doc_path.suffix.lower()
-            if ext == ".eml":
-                with open(doc_path, "rb") as fh:
-                    msg = BytesParser(policy=policy.default).parse(fh)
-                for h in ("Subject", "From", "To", "Cc", "Date"):
-                    headers[h] = msg.get(h, "")
-                
-                if msg.is_multipart():
-                    for part in msg.walk():
-                        disposition = str(part.get_content_disposition() or "").lower()
-                        if disposition == "attachment":
-                            continue
-                        ctype = part.get_content_type()
-                        try:
-                            payload = part.get_content()
-                        except Exception:
-                            payload = part.get_payload(decode=True)
-                            if isinstance(payload, bytes):
-                                payload = payload.decode(part.get_content_charset() or "utf-8", errors="ignore")
-                        if isinstance(payload, str):
-                            if ctype == "text/html":
-                                body_html = payload
-                                break
-                            elif ctype == "text/plain":
-                                body_text = payload
+            doc_model = self.service.read_document(doc_path)
+
+            header_lines = []
+            body_lines = []
+            for line in doc_model.plain_text.splitlines():
+                if any(line.startswith(prefix) for prefix in ("Subject:", "From:", "To:", "Cc:", "Date:")):
+                    header_lines.append(line)
                 else:
-                    payload = msg.get_content()
-                    if isinstance(payload, str):
-                        if msg.get_content_type() == "text/html":
-                            body_html = payload
-                        else:
-                            body_text = payload
-                            
-            elif ext == ".msg":
-                msg = extract_msg.Message(str(doc_path))
-                try:
-                    headers["Subject"] = getattr(msg, "subject", "") or ""
-                    headers["From"] = getattr(msg, "sender", "") or ""
-                    headers["To"] = getattr(msg, "to", "") or ""
-                    headers["Cc"] = getattr(msg, "cc", "") or ""
-                    headers["Date"] = getattr(msg, "date", "") or ""
-                    
-                    html_bytes = getattr(msg, "htmlBody", None)
-                    if html_bytes:
-                        if isinstance(html_bytes, bytes):
-                            body_html = html_bytes.decode("utf-8", errors="ignore")
-                        else:
-                            body_html = str(html_bytes)
-                    
-                    if not body_html:
-                        body_text = getattr(msg, "body", "") or ""
-                finally:
-                    msg.close()
-                    
+                    body_lines.append(line)
+
             headers_html = []
-            for h, val in headers.items():
-                if val:
-                    val_esc = html_lib.escape(str(val))
-                    headers_html.append(f"<div style='margin-bottom: 6px;'><strong style='color: #94a3b8; font-size: 13px;'>{h}:</strong> <span style='font-size: 14px;'>{val_esc}</span></div>")
-                    
-            body_content = ""
-            if body_html:
-                body_content = f"<pre style='white-space: pre-wrap; font-family: inherit; font-size: 14px; margin: 0;'>{html_lib.escape(body_html)}</pre>"
-            else:
-                body_content = f"<pre style='white-space: pre-wrap; font-family: inherit; font-size: 14px; margin: 0;'>{html_lib.escape(body_text)}</pre>"
-                
+            for line in header_lines:
+                label, _, value = line.partition(":")
+                headers_html.append(
+                    "<div class='email-header-row'>"
+                    f"<span class='email-header-label'>{html_lib.escape(label)}:</span>"
+                    f"<span>{html_lib.escape(value.strip())}</span>"
+                    "</div>"
+                )
+
+            body_html = []
+            for line in body_lines:
+                cleaned = line.strip()
+                if not cleaned:
+                    body_html.append("<div class='email-spacer'></div>")
+                    continue
+                body_html.append(f"<div class='email-line'>{html_lib.escape(cleaned)}</div>")
+
             html = f"""
             <!DOCTYPE html>
             <html>
@@ -212,12 +172,12 @@ class WebviewBridge:
                 <meta charset="utf-8">
                 <style>
                     body {{
-                        font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
                         background-color: #0b0f19;
                         color: #e2e8f0;
                         margin: 0;
                         padding: 24px;
-                        line-height: 1.6;
+                        line-height: 1.5;
                     }}
                     .email-container {{
                         max-width: 800px;
@@ -230,11 +190,31 @@ class WebviewBridge:
                     }}
                     .email-headers {{
                         background-color: #151e2e;
-                        padding: 20px;
+                        padding: 18px 20px;
                         border-bottom: 1px solid #1f2937;
+                    }}
+                    .email-header-row {{
+                        display: grid;
+                        grid-template-columns: 72px 1fr;
+                        gap: 10px;
+                        margin-bottom: 7px;
+                        font-size: 14px;
+                    }}
+                    .email-header-label {{
+                        color: #94a3b8;
+                        font-weight: 700;
                     }}
                     .email-body {{
                         padding: 24px;
+                        font-size: 14px;
+                    }}
+                    .email-line {{
+                        margin-bottom: 7px;
+                        white-space: pre-wrap;
+                        overflow-wrap: anywhere;
+                    }}
+                    .email-spacer {{
+                        height: 10px;
                     }}
                 </style>
             </head>
@@ -244,7 +224,7 @@ class WebviewBridge:
                         {"".join(headers_html)}
                     </div>
                     <div class="email-body">
-                        {body_content}
+                        {"".join(body_html)}
                     </div>
                 </div>
             </body>
@@ -315,6 +295,9 @@ class WebviewBridge:
             traceback.print_exc()
             raise e
 
+    def importFile(self, path: str, is_engineer_report: bool = False) -> dict[str, Any]:
+        return self.import_file(path, is_engineer_report)
+
     def import_file_data(self, name: str, base64_data: str, is_engineer_report: bool = False) -> dict[str, Any]:
         try:
             import base64
@@ -332,7 +315,10 @@ class WebviewBridge:
                 res = self.import_file(temp_path, is_engineer_report)
                 res["document"]["source_path"] = name
                 if suffix == ".pdf":
-                    res["pdf_base64"] = base64_data
+                    # The frontend already has a local Blob URL for dropped PDFs.
+                    # Do not return a deleted temp-file URI or echo large base64 data.
+                    res["pdf_path"] = None
+                    res["pdf_base64"] = None
                 
                 if not is_engineer_report:
                     self.last_imported_bytes = file_bytes
@@ -348,6 +334,9 @@ class WebviewBridge:
             import traceback
             traceback.print_exc()
             raise e
+
+    def importFileData(self, name: str, base64_data: str, is_engineer_report: bool = False) -> dict[str, Any]:
+        return self.import_file_data(name, base64_data, is_engineer_report)
 
 
     def re_run_rule(self, doc_text: str, file_type: str, lines: list[dict[str, Any]], rule: dict[str, Any], field_key: str) -> dict[str, Any]:
@@ -449,6 +438,9 @@ class WebviewBridge:
             traceback.print_exc()
             raise e
 
+    def reRunRule(self, doc_text: str, file_type: str, lines: list[dict[str, Any]], rule: dict[str, Any], field_key: str) -> dict[str, Any]:
+        return self.re_run_rule(doc_text, file_type, lines, rule, field_key)
+
     def extract_document_with_provider(self, doc_dict: dict[str, Any], provider_cfg: dict[str, Any]) -> dict[str, Any]:
         try:
             doc_model = self.service.document_from_dict(doc_dict)
@@ -458,6 +450,9 @@ class WebviewBridge:
             import traceback
             traceback.print_exc()
             raise e
+
+    def extractDocumentWithProvider(self, doc_dict: dict[str, Any], provider_cfg: dict[str, Any]) -> dict[str, Any]:
+        return self.extract_document_with_provider(doc_dict, provider_cfg)
 
     def extract_images(self, fields: dict[str, str]) -> dict[str, Any]:
         try:
@@ -482,6 +477,9 @@ class WebviewBridge:
             traceback.print_exc()
             return {"success": False, "message": f"Error extracting images: {str(e)}"}
 
+    def extractImages(self, fields: dict[str, str]) -> dict[str, Any]:
+        return self.extract_images(fields)
+
     def export_json(self, fields: dict[str, str]) -> dict[str, str]:
         try:
             return self.service.export_json_bundle(self.service.record_from_field_map(fields))
@@ -489,6 +487,9 @@ class WebviewBridge:
             import traceback
             traceback.print_exc()
             raise e
+
+    def exportJson(self, fields: dict[str, str]) -> dict[str, str]:
+        return self.export_json(fields)
 
     def open_folder(self, folder_path: str) -> bool:
         try:
@@ -508,6 +509,9 @@ class WebviewBridge:
             return True
         except Exception:
             return False
+
+    def openFolder(self, folder_path: str) -> bool:
+        return self.open_folder(folder_path)
 
     def export_docx(self, fields: dict[str, str]) -> bool:
         try:
@@ -543,6 +547,9 @@ class WebviewBridge:
             traceback.print_exc()
             raise e
 
+    def exportDocx(self, fields: dict[str, str]) -> bool:
+        return self.export_docx(fields)
+
     def select_file_dialog(self) -> Optional[str]:
         if not self.window:
             return None
@@ -555,6 +562,9 @@ class WebviewBridge:
         if res and len(res) > 0:
             return str(res[0])
         return None
+
+    def selectFileDialog(self) -> Optional[str]:
+        return self.select_file_dialog()
 
     def _seed_providers_file(self, dest_path: Path) -> None:
         import shutil

@@ -1,0 +1,98 @@
+Claim Form
+Owner Details
+Name: KARL BASS
+Address:
+D.O.B
+Tel:
+Male/Female:
+Occupation:
+National; Insurance no:
+Email Add:
+Third Party Details
+Driver Name: UNKNOWN
+Address:
+Tel:
+Accident Details
+Accident Date: 7/04/26
+Accident Time: 14:30
+Driver Details
+Name: KARL BASS
+Address: 10 ACORN AVENUE CRAWLEY DOWN
+CRAWLEY RH10 4AL
+Tel: 07442499511
+D.O.B: 23/09/90
+Male/Female: MALE
+Occupation: MECHANIC
+N.L No:
+Number of passengers: 0
+Email Add:
+Third Party Vehicle Details
+Reg No: YM23 XRS
+Make & Model: AUTO PARTS VAN
+Insurer:
+Claim Ref:
+Tel:
+Accident Location: STEPHENSON WAY CRAWLEY
+Accident Circumstances
+Weather Conditions:
+Private & Confidential
+| Vehicle Details
+Reg No: WJ23 OLR
+Make & Model: VW ID5
+Insurance Company:
+Type of Cover:
+Policy No:
+Witness Details
+Name:
+Address:
+Tel:
+| Police Details
+Did Police Attend: No
+Ref No:
+Officer name and number:
+Police Station:
+Tel No:
+Road Conditions:
+MY VEHICLE WAS PARKED OUTSIDE MY GARAGE WHEN PARTS VAN STARTED REVERSING AND HIT MY VEHICLE
+Was Client wearing a seatbelt? Yes
+|
+|
+f
+{
+i
+3
+
+injuries / Medical Attention Previous Accidents Vehicle Damage and Hire Details
+Type: Multiple Injuries Accidents In The Last 5 Years: Claiming for Vehicle Damage:
+Description: If So List All: Write Off:
+Vehicle Repairable:
+Doctors Attended: Yes/No
+Vehicle Legally Drivable:
+i
+:
+i
+Date Attended:
+Replacement Vehicle Required: Yes/No
+Hospital Attended: Yes/No:
+Vehicle Model Provided:
+Date Attended:
+Registration Number:
+Physio Required: Yes/No Hire Start Date:
+Hire Ref:
+Taxi/SDP:
+Hire Rate
+Additional Notes and Sketch
+Source:
+Details of Claim
+Client Claiming for (please tick)
+Injury [] Loss of Earnings [] Excess [] Hire Car [] Cashin Lieu[] Authorized Repairs [] Credit Repair x Storage and Recovery []
+Declaration
+| confirm that the information contained in this document is true.
+Print Name: Signed: DATE:
+i
+i
+i
+i
+|
+i
+E

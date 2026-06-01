@@ -1,0 +1,139 @@
+{
+  "provider": {
+    "provider_id": "acsp",
+    "provider_name": "ACSP",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "ACSP",
+      "raw_value": "ACSP",
+      "rule_id": "acsp_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "CX69LEW",
+      "raw_value": "CX69 LEW",
+      "rule_id": "acsp_vrm",
+      "confidence": 0.92,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 40,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "Toyota Prius",
+      "raw_value": "Toyota Prius",
+      "rule_id": "acsp_vehicle_model",
+      "confidence": 0.92,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 41,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "claimant_name": {
+      "value": "Mazhar Hussain Butt",
+      "raw_value": "Mazhar Hussain Butt",
+      "rule_id": "acsp_claimant_name",
+      "confidence": 0.9,
+      "source_span": null,
+      "issues": []
+    },
+    "reference": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_reference",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "reference",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'reference' is empty."
+        }
+      ]
+    },
+    "incident_date": {
+      "value": "06/05/2026",
+      "raw_value": "06/05/2026",
+      "rule_id": "acsp_incident_date",
+      "confidence": 0.95,
+      "source_span": null,
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_instruction_date",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "instruction_date",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'instruction_date' is empty."
+        }
+      ]
+    },
+    "inspection_date": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_inspection_date",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "63 Booth Road\nCrawley\n\n\n\nRH11 6AG",
+      "raw_value": "63 Booth Road, Crawley, RHI\\ GAG",
+      "rule_id": "acsp_inspection_address",
+      "confidence": 0.85,
+      "source_span": null,
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "Client was stationary, waiting to pick up children from mosque, when the third-party came out of car park from the left and collided with the back bumper of client’s vehicle (as client was facing opposite way)",
+      "raw_value": "Client was stationary, waiting to pick up children from mosque, when the third-party came out of car park from the left and collided with the back bumper of client’s vehicle (as client was facing opposite way)",
+      "rule_id": "acsp_accident_circumstances",
+      "confidence": 0.85,
+      "source_span": null,
+      "issues": []
+    },
+    "vat_status": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_vat_status",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_mileage",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "acsp_mileage_unit",
+      "confidence": 0.0,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}

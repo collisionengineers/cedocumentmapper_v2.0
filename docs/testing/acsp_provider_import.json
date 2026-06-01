@@ -1,0 +1,73 @@
+{
+  "schema_version": 2,
+  "providers": [
+    {
+      "id": "acsp",
+      "name": "ACSP",
+      "work_provider": "ACSP",
+      "enabled": true,
+      "priority": 10,
+      "detect": {
+        "required_phrases": [
+          "Claim Form"
+        ],
+        "optional_phrases": [
+          "Owner Details",
+          "Driver Details",
+          "Vehicle Details",
+          "Accident Details",
+          "Private & Confidential"
+        ],
+        "negative_phrases": [],
+        "minimum_confidence": 0.9
+      },
+      "suppress_fallback_fields": [
+        "reference",
+        "instruction_date",
+        "inspection_date",
+        "vat_status",
+        "mileage",
+        "mileage_unit"
+      ],
+      "force_postcode_for_inspection_address": true,
+      "field_rules": {
+        "work_provider": {
+          "id": "acsp_work_provider",
+          "kind": "acsp_claim_form"
+        },
+        "vrm": {
+          "id": "acsp_vrm",
+          "kind": "acsp_claim_form"
+        },
+        "vehicle_model": {
+          "id": "acsp_vehicle_model",
+          "kind": "acsp_claim_form"
+        },
+        "claimant_name": {
+          "id": "acsp_claimant_name",
+          "kind": "acsp_claim_form"
+        },
+        "reference": {
+          "id": "acsp_reference",
+          "kind": "acsp_claim_form"
+        },
+        "incident_date": {
+          "id": "acsp_incident_date",
+          "kind": "acsp_claim_form"
+        },
+        "instruction_date": {
+          "id": "acsp_instruction_date",
+          "kind": "acsp_claim_form"
+        },
+        "inspection_address": {
+          "id": "acsp_inspection_address",
+          "kind": "acsp_claim_form"
+        },
+        "accident_circumstances": {
+          "id": "acsp_accident_circumstances",
+          "kind": "acsp_claim_form"
+        }
+      }
+    }
+  ]
+}

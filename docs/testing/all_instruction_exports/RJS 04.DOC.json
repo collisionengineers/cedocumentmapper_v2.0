@@ -1,0 +1,141 @@
+{
+  "provider": {
+    "provider_id": "rjs",
+    "provider_name": "RJS",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "RJS",
+      "raw_value": "RJS",
+      "rule_id": "rjs_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "EA21YFN",
+      "raw_value": "EA21YFN",
+      "rule_id": "rjs_vrm",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 17,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "IONIQ PREMIUM",
+      "raw_value": "IONIQ PREMIUM",
+      "rule_id": "rjs_vehicle_model",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 19,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "claimant_name": {
+      "value": "Mr Abdul Malik",
+      "raw_value": "Mr Abdul Malik",
+      "rule_id": "rjs_claimant_name",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 15,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "reference": {
+      "value": "Our Reference: 126068.001/LG/LDB",
+      "raw_value": "Our Reference: 126068.001/LG/LDB",
+      "rule_id": "rjs_reference",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 8,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "incident_date": {
+      "value": "21/04/2026",
+      "raw_value": "21st April 2026",
+      "rule_id": "rjs_incident_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 16,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "28/04/2026",
+      "raw_value": "28th April 2026",
+      "rule_id": "fallback_instruction_date_top_date",
+      "confidence": 0.5,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 12,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "inspection_date": {
+      "value": "01/06/2026",
+      "raw_value": "",
+      "rule_id": "rjs_inspection_date",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "113 Dallow Road\nLuton\n\n\n\nLU1 1NP",
+      "raw_value": "113 Dallow Road\nLuton\nLU1 1NP",
+      "rule_id": "rjs_inspection_address",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "rjs_accident_circumstances",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "vat_status": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "rjs_vat_status",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "rjs_mileage",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "rjs_mileage_unit",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}

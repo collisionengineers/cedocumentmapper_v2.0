@@ -204,6 +204,20 @@ export default function App() {
   // Line elements mapping to scroll into view
   const lineRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
+  const getBridgeMethod = (snakeName: string, camelName: string) => {
+    const api = window.pywebview?.api as Record<string, any> | undefined;
+    const method = api?.[snakeName] ?? api?.[camelName];
+    return typeof method === "function" ? method.bind(api) : null;
+  };
+
+  const callBridge = async <T,>(snakeName: string, camelName: string, ...args: any[]): Promise<T> => {
+    const method = getBridgeMethod(snakeName, camelName);
+    if (!method) {
+      throw new TypeError(`window.pywebview.api.${snakeName} is not available`);
+    }
+    return await method(...args);
+  };
+
   const getConfidenceExplanation = (_key: string, fieldVal: FieldExtraction) => {
     const confPercent = Math.round((fieldVal.confidence ?? 1) * 100);
     const ruleId = fieldVal.rule_id || "";
@@ -315,11 +329,11 @@ export default function App() {
     
     if (window.pywebview) {
       try {
-        const success = await window.pywebview.api.save_providers(updatedProviders);
+        const success = await callBridge<boolean>("save_providers", "saveProviders", updatedProviders);
         if (success) {
           showStatus("Provider preset created and saved successfully!", "success");
           if (document) {
-            const newRecord = await window.pywebview.api.extract_document_with_provider(document, newProvider);
+            const newRecord = await callBridge<ExtractedRecord>("extract_document_with_provider", "extractDocumentWithProvider", document, newProvider);
             setRecord(newRecord);
           }
         } else {
@@ -363,9 +377,9 @@ export default function App() {
 
     const fetchProviders = async () => {
       if (isLoaded) return true;
-      if (!window.pywebview?.api || typeof window.pywebview.api.load_providers !== "function") return false;
+      if (!window.pywebview?.api || !getBridgeMethod("load_providers", "loadProviders")) return false;
       try {
-        const data = await window.pywebview.api.load_providers();
+        const data = await callBridge<ProviderConfig[]>("load_providers", "loadProviders");
         setProviders(data);
         setInitialProviders(JSON.parse(JSON.stringify(data)));
         if (data.length > 0) {
@@ -434,16 +448,44 @@ export default function App() {
     setTimeout(() => setStatusMessage(null), 5000);
   };
 
+  const selectDetectedProvider = async (providerId: string | null) => {
+    if (!providerId || providerId === "unknown_temp") return false;
+
+    let providerList = providers;
+    let matched = providerList.find(p => p.id === providerId);
+    if (!matched && window.pywebview?.api) {
+      try {
+        providerList = await callBridge<ProviderConfig[]>("load_providers", "loadProviders");
+        setProviders(providerList);
+        setInitialProviders(JSON.parse(JSON.stringify(providerList)));
+        matched = providerList.find(p => p.id === providerId);
+      } catch (err) {
+        console.error("Failed to refresh providers after import", err);
+      }
+    }
+
+    if (matched) {
+      setActiveProvider(matched);
+      return true;
+    }
+    return false;
+  };
+
   const handleSelectFile = async (isEngineerReport = false) => {
     if (!window.pywebview?.api) {
       showStatus("Desktop interface not ready.", "error");
       return;
     }
     try {
-      const path = await window.pywebview.api.select_file_dialog();
+      const path = await callBridge<string | null>("select_file_dialog", "selectFileDialog");
       if (path) {
         showStatus(`Importing ${isEngineerReport ? "Engineer Report" : "Document"}...`, "info");
-        const res = await window.pywebview.api.import_file(path, isEngineerReport);
+        const res = await callBridge<{
+          document: DocumentModel;
+          record: ExtractedRecord;
+          pdf_base64: string | null;
+          pdf_path?: string | null;
+        }>("import_file", "importFile", path, isEngineerReport);
         
         if (isEngineerReport) {
           // Merge values from engineer report
@@ -487,10 +529,8 @@ export default function App() {
           }
 
           // Match active preset selector to detected provider
-          const matched = providers.find(p => p.id === res.record.provider.provider_id);
-          if (matched) {
-            setActiveProvider(matched);
-          } else if (res.record.provider.provider_id === "unknown_temp") {
+          const matched = await selectDetectedProvider(res.record.provider.provider_id);
+          if (!matched && res.record.provider.provider_id === "unknown_temp") {
             const tempProvider: ProviderConfig = {
               id: "unknown_temp",
               name: "New Provider (Auto-Detected)",
@@ -561,21 +601,44 @@ export default function App() {
         if (window.pywebview?.api) {
           showStatus("Parsing dropped document...", "info");
           try {
-            const res = await window.pywebview.api.import_file_data(file.name, base64Data, false);
+            const res = await callBridge<{
+              document: DocumentModel;
+              record: ExtractedRecord;
+              pdf_base64: string | null;
+              pdf_path?: string | null;
+            }>("import_file_data", "importFileData", file.name, base64Data, false);
             setDocument(res.document);
             setRecord(res.record);
             setOverrideFields(new Set());
             
             // If PDF, use native rendering tab
-            if (file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
+            if (res.pdf_path) {
+              setPdfUrl(res.pdf_path);
+              setViewMode("pdf");
+            } else if (res.pdf_base64 || file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf")) {
               setViewMode("pdf");
             } else {
+              setPdfUrl(null);
               setViewMode("text");
             }
 
-            const matched = providers.find(p => p.id === res.record.provider.provider_id);
-            if (matched) {
-              setActiveProvider(matched);
+            const matched = await selectDetectedProvider(res.record.provider.provider_id);
+            if (!matched && res.record.provider.provider_id === "unknown_temp") {
+              const tempProvider: ProviderConfig = {
+                id: "unknown_temp",
+                name: "New Provider (Auto-Detected)",
+                work_provider: "UNKNOWN",
+                enabled: true,
+                priority: 999,
+                detect: {
+                  required_phrases: [],
+                  optional_phrases: [],
+                  negative_phrases: [],
+                  minimum_confidence: 0.0
+                },
+                field_rules: {}
+              };
+              setActiveProvider(tempProvider);
             }
             showStatus("Document parsed successfully!", "success");
           } catch (err) {
@@ -599,7 +662,9 @@ export default function App() {
     if (!document || !window.pywebview?.api) return;
     try {
       const flatLines = document.pages.flatMap(p => p.lines);
-      const ext = await window.pywebview.api.re_run_rule(
+      const ext = await callBridge<FieldExtraction>(
+        "re_run_rule",
+        "reRunRule",
         document.plain_text,
         document.source_type,
         flatLines,
@@ -769,7 +834,7 @@ export default function App() {
   const handleSaveProviders = async () => {
     if (!window.pywebview?.api) return;
     try {
-      const ok = await window.pywebview.api.save_providers(providers);
+      const ok = await callBridge<boolean>("save_providers", "saveProviders", providers);
       if (ok) {
         setInitialProviders(JSON.parse(JSON.stringify(providers)));
         showStatus("All presets successfully saved to disk!", "success");
@@ -786,7 +851,7 @@ export default function App() {
       Object.keys(record.fields).forEach(k => {
         fieldsMap[k] = record.fields[k].value;
       });
-      const result = await window.pywebview.api.export_json(fieldsMap);
+      const result = await callBridge<{ path: string; folder: string }>("export_json", "exportJson", fieldsMap);
       if (result.path) {
         showStatus("JSON exported. Open output folder.", "success", result.folder);
       }
@@ -802,7 +867,7 @@ export default function App() {
       Object.keys(record.fields).forEach(k => {
         fieldsMap[k] = record.fields[k].value;
       });
-      const ok = await window.pywebview.api.export_docx(fieldsMap);
+      const ok = await callBridge<boolean>("export_docx", "exportDocx", fieldsMap);
       if (ok) {
         showStatus("RJS Letter exported to Desktop successfully!", "success");
       }
@@ -819,7 +884,13 @@ export default function App() {
         fieldsMap[k] = record.fields[k].value;
       });
       showStatus("Extracting images to Desktop...", "info");
-      const res = await window.pywebview.api.extract_images(fieldsMap);
+      const res = await callBridge<{
+        success: boolean;
+        count: number;
+        message: string;
+        folder?: string;
+        paths?: string[];
+      }>("extract_images", "extractImages", fieldsMap);
       if (res.success) {
         showStatus(res.message + " Open output folder.", "success", res.folder);
       } else {
@@ -835,7 +906,7 @@ export default function App() {
     if (document && window.pywebview?.api) {
       try {
         showStatus("Re-extracting fields...", "info");
-        const newRecord = await window.pywebview.api.extract_document_with_provider(document, provider);
+        const newRecord = await callBridge<ExtractedRecord>("extract_document_with_provider", "extractDocumentWithProvider", document, provider);
         setRecord(newRecord);
         setOverrideFields(new Set());
         showStatus(`Fields updated using preset: ${provider.name}`, "success");
@@ -1092,7 +1163,10 @@ export default function App() {
                 />
               ) : (
                 document.pages.map(page => (
-                  <div key={page.page_index} className="preview-page">
+                  <div
+                    key={page.page_index}
+                    className={`preview-page ${document.source_type === "eml" || document.source_type === "msg" ? "email-text-page" : ""}`}
+                  >
                     <div style={{ position: "absolute", top: "10px", right: "16px", fontSize: "10px", color: "var(--text-muted)" }}>
                       PAGE {page.page_index + 1}
                     </div>
@@ -1608,7 +1682,10 @@ export default function App() {
             <button
               className="btn"
               style={{ height: "26px", padding: "0 10px", background: "rgba(255,255,255,0.18)", color: "white", borderColor: "rgba(255,255,255,0.35)" }}
-              onClick={() => window.pywebview?.api.open_folder(statusMessage.folder || "")}
+              onClick={() => {
+                callBridge<boolean>("open_folder", "openFolder", statusMessage.folder || "")
+                  .catch(err => console.error("Open folder failed:", err));
+              }}
             >
               Open Folder
             </button>

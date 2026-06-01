@@ -1,0 +1,178 @@
+{
+  "provider": {
+    "provider_id": "dfd",
+    "provider_name": "DFD",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "DFD",
+      "raw_value": "DFD",
+      "rule_id": "dfd_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "LS69OYW",
+      "raw_value": "LS69OYW",
+      "rule_id": "dfd_vrm",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 12,
+        "bbox": [
+          302.43798828125,
+          366.24609375,
+          359.1260070800781,
+          382.7341003417969
+        ]
+      },
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "dfd_vehicle_model",
+      "confidence": null,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "vehicle_model",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'vehicle_model' is empty."
+        }
+      ]
+    },
+    "claimant_name": {
+      "value": "Samantha Wilson",
+      "raw_value": "Samantha Wilson",
+      "rule_id": "dfd_claimant_name",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 8,
+        "bbox": [
+          301.7829895019531,
+          290.97308349609375,
+          399.114990234375,
+          307.4610900878906
+        ]
+      },
+      "issues": []
+    },
+    "reference": {
+      "value": "RJP/81517",
+      "raw_value": "RJP/81517",
+      "rule_id": "dfd_reference",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 4,
+        "bbox": [
+          300.4739990234375,
+          217.00909423828125,
+          359.8380126953125,
+          233.49708557128906
+        ]
+      },
+      "issues": []
+    },
+    "incident_date": {
+      "value": "28/04/2026",
+      "raw_value": "28/4/26",
+      "rule_id": "dfd_incident_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 10,
+        "bbox": [
+          301.1289978027344,
+          328.9370422363281,
+          341.1610107421875,
+          345.4250793457031
+        ]
+      },
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "01/05/2026",
+      "raw_value": "1/5/26",
+      "rule_id": "dfd_instruction_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 6,
+        "bbox": [
+          300.4739990234375,
+          253.66407775878906,
+          333.833984375,
+          270.152099609375
+        ]
+      },
+      "issues": []
+    },
+    "inspection_date": {
+      "value": "01/06/2026",
+      "raw_value": "",
+      "rule_id": "dfd_inspection_date",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "TBC\n\n\n\n\n",
+      "raw_value": "TBC",
+      "rule_id": "dfd_inspection_address",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 16,
+        "bbox": [
+          301.1289978027344,
+          464.4290771484375,
+          325.1289978027344,
+          480.9170837402344
+        ]
+      },
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "TPV reverses into our o/s from a side\nroad\nArea of damage\no/s",
+      "raw_value": "TPV reverses into our o/s from a side\nroad\nArea of damage\no/s",
+      "rule_id": "dfd_accident_circumstances",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vat_status": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "dfd_vat_status",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "dfd_mileage",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "dfd_mileage_unit",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}

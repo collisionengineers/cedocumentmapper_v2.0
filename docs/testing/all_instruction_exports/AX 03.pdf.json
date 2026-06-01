@@ -1,0 +1,171 @@
+{
+  "provider": {
+    "provider_id": "ax",
+    "provider_name": "AX",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "AX",
+      "raw_value": "AX",
+      "rule_id": "ax_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "DA67YKH",
+      "raw_value": "DA67YKH",
+      "rule_id": "ax_vrm",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 14,
+        "bbox": [
+          97.19999694824219,
+          249.80943298339844,
+          181.6286163330078,
+          259.8084411621094
+        ]
+      },
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "MITSUBISHI ECLIPSE CROSS 4 4X4 CVT",
+      "raw_value": "MITSUBISHI ECLIPSE CROSS 4 4X4 CVT",
+      "rule_id": "ax_vehicle_model",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 15,
+        "bbox": [
+          83.66400146484375,
+          266.8734130859375,
+          351.3817138671875,
+          276.8724060058594
+        ]
+      },
+      "issues": []
+    },
+    "claimant_name": {
+      "value": "Mr Callum McGregor",
+      "raw_value": "Mr Callum McGregor",
+      "rule_id": "ax_claimant_name",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "reference": {
+      "value": "1063495",
+      "raw_value": "1063495",
+      "rule_id": "ax_reference",
+      "confidence": 0.96,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 4,
+        "bbox": [
+          130.2480010986328,
+          150.96331787109375,
+          201.7630157470703,
+          162.9623260498047
+        ]
+      },
+      "issues": []
+    },
+    "incident_date": {
+      "value": "30/04/2026",
+      "raw_value": "30 Apr 2026",
+      "rule_id": "ax_incident_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 16,
+        "bbox": [
+          49.895999908447266,
+          283.86541748046875,
+          197.0770721435547,
+          293.8644104003906
+        ]
+      },
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "05/05/2026",
+      "raw_value": "05 May 2026",
+      "rule_id": "fallback_instruction_date_top_date",
+      "confidence": 0.5,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 1,
+        "bbox": [
+          16.200000762939453,
+          116.04334259033203,
+          94.73344421386719,
+          128.04234313964844
+        ]
+      },
+      "issues": []
+    },
+    "inspection_date": {
+      "value": "07/05/2026",
+      "raw_value": "07/05/2026",
+      "rule_id": "ax_inspection_date",
+      "confidence": 0.9629629629629629,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 11,
+        "bbox": [
+          130.2480010986328,
+          177.8193359375,
+          226.81692504882812,
+          189.81834411621094
+        ]
+      },
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "",
+      "raw_value": "Image-based Assessment",
+      "rule_id": "ax_inspection_address",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "Client proceeding correctly on a country road B769 on a blind bend and the\ntp overtaking on the corner and as he is overtaking the tp is oncoming and\nthe tp realised late and attempted to going back onto the client side of the\nroad and collided with the tp driver side and then collided with the clients\ndriver side which then caused the tp to drive off the road into a field. Details\nexhcanged.\nPre Existing\nn/a\nDamage",
+      "raw_value": "Client proceeding correctly on a country road B769 on a blind bend and the\ntp overtaking on the corner and as he is overtaking the tp is oncoming and\nthe tp realised late and attempted to going back onto the client side of the\nroad and collided with the tp driver side and then collided with the clients\ndriver side which then caused the tp to drive off the road into a field. Details\nexhcanged.\nPre Existing\nn/a\nDamage",
+      "rule_id": "ax_accident_circumstances",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vat_status": {
+      "value": "No",
+      "raw_value": "No",
+      "rule_id": "ax_vat_status",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "ax_mileage",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "ax_mileage_unit",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}

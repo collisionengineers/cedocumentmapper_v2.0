@@ -1,0 +1,61 @@
+Claim Form
+Owner. Details’
+Name: SAME
+Address:
+Tel:
+Male/Female:
+Occupation:
+National Insurance no:
+Email Add:
+Third.Party Details
+Driver Name: NOT GIVEN
+Address:
+Tel:
+Driver. details
+Name: HUMZA SATTI
+Address: 17 TATHAM COURT CHIPPENDALE
+ROAD CRAWLEY RH11 9LW
+Tel: 07535547101
+D.O.B: 11/07/98
+Male/Female: MALE
+Occupation: SELF EMPLOYED
+Taxi:
+Taxi Company:
+Licensed Council:
+N.I. No:
+Number of passengers:
+Email Add:
+Third Party Vehicle Details
+Reg No: KS73 SKF
+Make & Model: PEUGEOT 3008
+Insurer:
+Claim Ref:
+Tel:
+| Vehicle Details
+Private & Confidential
+Reg No: BJ55 YXS
+Make & Model: HONDA CIVIC
+Manual/Auto
+Insurance Company:
+Type of Cover:
+Policy No:
+Witness Details
+Name:
+Address:
+Email:
+Tel:
+| Police Details
+Did Police Attend:
+Ref No:
+Officer name and number:
+Police Station:
+Tel No:
+‘Accident Details : . :
+Accident Date: 22/05/26
+Accident Time: 20:25
+Accident Location: CHURCH LANE KINGSBURY LONDON
+Accident Circumstances:
+MY VEHICLE WAS PARKED WHEN T/P HIT MY VEHICLE
+Was Client wearing a seatbelt?
+Weather Conditions:
+Road Conditions:

@@ -1,0 +1,158 @@
+{
+  "provider": {
+    "provider_id": "alison",
+    "provider_name": "ALISON",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "ALISON",
+      "raw_value": "ALISON",
+      "rule_id": "alison_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "BD65XRZ",
+      "raw_value": "BD65 XRZ",
+      "rule_id": "alison_vrm",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "alison_vehicle_model",
+      "confidence": null,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "vehicle_model",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'vehicle_model' is empty."
+        }
+      ]
+    },
+    "claimant_name": {
+      "value": "Mohammed Tausif",
+      "raw_value": "Mohammed Tausif",
+      "rule_id": "alison_claimant_name",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "reference": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "alison_reference",
+      "confidence": null,
+      "source_span": null,
+      "issues": [
+        {
+          "field": "reference",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'reference' is empty."
+        }
+      ]
+    },
+    "incident_date": {
+      "value": "06/10/2025",
+      "raw_value": "06/10/2025",
+      "rule_id": "alison_incident_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 8,
+        "bbox": [
+          178.94000244140625,
+          223.09877014160156,
+          237.11912536621094,
+          235.4083709716797
+        ]
+      },
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "10/10/2025",
+      "raw_value": "10 October 2025",
+      "rule_id": "alison_instruction_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 0,
+        "bbox": [
+          70.94400024414062,
+          134.50880432128906,
+          155.9691162109375,
+          146.8184051513672
+        ]
+      },
+      "issues": []
+    },
+    "inspection_date": {
+      "value": "01/06/2026",
+      "raw_value": "",
+      "rule_id": "alison_inspection_date",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "2 Lady Royd Gate\nBradford\n\n\n\nBD8 0FB",
+      "raw_value": "2 Lady Royd Gate, Bradford, BD8 0FB",
+      "rule_id": "alison_inspection_address",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 16,
+        "bbox": [
+          141.86000061035156,
+          362.17877197265625,
+          332.65911865234375,
+          374.4883728027344
+        ]
+      },
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "alison_accident_circumstances",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "vat_status": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "alison_vat_status",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "alison_mileage",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "alison_mileage_unit",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}

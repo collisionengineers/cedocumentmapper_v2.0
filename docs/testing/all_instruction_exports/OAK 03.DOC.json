@@ -1,0 +1,152 @@
+{
+  "provider": {
+    "provider_id": "oak",
+    "provider_name": "OAK",
+    "confidence": 1.0,
+    "matched_terms": [],
+    "missing_terms": [],
+    "rejected_terms": []
+  },
+  "fields": {
+    "work_provider": {
+      "value": "OAK",
+      "raw_value": "OAK",
+      "rule_id": "oak_work_provider",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "vrm": {
+      "value": "CV68OVM",
+      "raw_value": "CV68 OVM",
+      "rule_id": "oak_vrm",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 185,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "vehicle_model": {
+      "value": "",
+      "raw_value": ",",
+      "rule_id": "oak_vehicle_model",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 186,
+        "bbox": null
+      },
+      "issues": [
+        {
+          "field": "vehicle_model",
+          "severity": "error",
+          "code": "missing_required_field",
+          "message": "Required field 'vehicle_model' is empty."
+        }
+      ]
+    },
+    "claimant_name": {
+      "value": "Mr Lewis Morgan",
+      "raw_value": "Mr Lewis Morgan",
+      "rule_id": "oak_claimant_name",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 183,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "reference": {
+      "value": "JAA/MORGAN/S486439.001",
+      "raw_value": "JAA/MORGAN/S486439.001",
+      "rule_id": "oak_reference",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 179,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "incident_date": {
+      "value": "04/05/2026",
+      "raw_value": "4th May 2026",
+      "rule_id": "oak_incident_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 184,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "instruction_date": {
+      "value": "05/05/2026",
+      "raw_value": "05/05/26",
+      "rule_id": "oak_instruction_date",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 180,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "inspection_date": {
+      "value": "01/06/2026",
+      "raw_value": "",
+      "rule_id": "oak_inspection_date",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "inspection_address": {
+      "value": "41 Moffat Crescent\nLochgelly\n\n\n\nKY5 9NY",
+      "raw_value": "41 Moffat Crescent\nLochgelly\nKY5 9NY",
+      "rule_id": "oak_inspection_address",
+      "confidence": 1.0,
+      "source_span": null,
+      "issues": []
+    },
+    "accident_circumstances": {
+      "value": "CL stationary on the road due to traffic when the oncoming TP hit CL's vehicle and proceed down the road.",
+      "raw_value": "CL stationary on the road due to traffic when the oncoming TP hit CL's vehicle and proceed down the road.",
+      "rule_id": "oak_accident_circumstances",
+      "confidence": 1.0,
+      "source_span": {
+        "page_index": 0,
+        "line_index": 189,
+        "bbox": null
+      },
+      "issues": []
+    },
+    "vat_status": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "oak_vat_status",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "oak_mileage",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    },
+    "mileage_unit": {
+      "value": "",
+      "raw_value": "",
+      "rule_id": "oak_mileage_unit",
+      "confidence": null,
+      "source_span": null,
+      "issues": []
+    }
+  },
+  "issues": []
+}
