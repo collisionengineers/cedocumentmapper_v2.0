@@ -6,7 +6,7 @@ src_path = str(Path(__file__).resolve().parent / "src")
 if src_path not in sys.path:
     sys.path.insert(0, src_path)
 
-from cedocumentmapper_v2.ui import start_webview
+from cedocumentmapper_v2.ui.host import start_webview
 
 if __name__ == "__main__":
     # Check if we should run in debug/dev mode (e.g. loading dev-server URL)
