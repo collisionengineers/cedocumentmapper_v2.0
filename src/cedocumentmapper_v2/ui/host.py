@@ -45,6 +45,7 @@ class WebviewBridge:
 
     def _render_docx_to_html(self, doc_path: Path) -> str:
         try:
+            import html as html_lib
             from docx import Document
             doc = Document(str(doc_path))
             html_body = []
@@ -54,12 +55,13 @@ class WebviewBridge:
                     p = Paragraph(child, doc)
                     text = p.text.strip()
                     if text:
+                        text_esc = html_lib.escape(text)
                         if p.style.name.startswith("Heading"):
                             level = p.style.name.replace("Heading", "").strip()
                             level = level if level.isdigit() else "1"
-                            html_body.append(f"<h{level}>{text}</h{level}>")
+                            html_body.append(f"<h{level}>{text_esc}</h{level}>")
                         else:
-                            html_body.append(f"<p>{text}</p>")
+                            html_body.append(f"<p>{text_esc}</p>")
                 elif child.tag.endswith('tbl'):
                     from docx.table import Table
                     t = Table(child, doc)
@@ -67,7 +69,7 @@ class WebviewBridge:
                     for row in t.rows:
                         tbl_html.append("<tr>")
                         for cell in row.cells:
-                            tbl_html.append(f"<td>{cell.text.strip()}</td>")
+                            tbl_html.append(f"<td>{html_lib.escape(cell.text.strip())}</td>")
                         tbl_html.append("</tr>")
                     tbl_html.append("</table>")
                     html_body.append("\n".join(tbl_html))
@@ -123,7 +125,8 @@ class WebviewBridge:
             """
             return html
         except Exception as e:
-            return f"<html><body><h3>Error rendering document preview: {str(e)}</h3></body></html>"
+            import html as html_lib
+            return f"<html><body><h3>Error rendering document preview: {html_lib.escape(str(e))}</h3></body></html>"
 
     def _render_email_to_html(self, doc_path: Path) -> str:
         try:
@@ -198,7 +201,7 @@ class WebviewBridge:
                     
             body_content = ""
             if body_html:
-                body_content = body_html
+                body_content = f"<pre style='white-space: pre-wrap; font-family: inherit; font-size: 14px; margin: 0;'>{html_lib.escape(body_html)}</pre>"
             else:
                 body_content = f"<pre style='white-space: pre-wrap; font-family: inherit; font-size: 14px; margin: 0;'>{html_lib.escape(body_text)}</pre>"
                 
@@ -249,7 +252,8 @@ class WebviewBridge:
             """
             return html
         except Exception as e:
-            return f"<html><body><h3>Error rendering email preview: {str(e)}</h3></body></html>"
+            import html as html_lib
+            return f"<html><body><h3>Error rendering email preview: {html_lib.escape(str(e))}</h3></body></html>"
 
     def import_file(self, path: str, is_engineer_report: bool = False) -> dict[str, Any]:
         try:
